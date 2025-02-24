@@ -1,0 +1,20 @@
+{
+  "name": "playbox",
+  "version": "1.0.0",
+  "description": "A video-sharing platform where users can upload, watch, like, and comment on videos. Designed for seamless video hosting and community engagement.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/app.js"
+  },
+  "keywords": [
+    "nodejs",
+    "expressjs",
+    "backend",
+    "video-sharing",
+    "file-upload"
+  ],
+  "author": "Akshat Bandooni",
+  "license": "ISC"
+}
