@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema(
   {
@@ -70,6 +72,18 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+userSchema.methods.generateJwt = function () {
+  return jwt.sign(
+    {
+      id: this._id,
+      username: this.username,
+      email: this.email,
+    },
+    process.env.JWT_SECRET || "SecretKey",
+    { expiresIn: process.env.JWT_EXPIRATION || "1d" }
+  );
+};
 
 // User Model
 const userModel = mongoose.model("User", userSchema);
