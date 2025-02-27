@@ -85,6 +85,14 @@ userSchema.methods.generateJwt = function () {
   );
 };
 
+userSchema.methods.encryptPassword = async function (password) {
+  return bcrypt.hash(password, process.env.SALT_ROUNDS || 10);
+};
+
+userSchema.methods.comparePassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
+
 // User Model
 const userModel = mongoose.model("User", userSchema);
 module.exports = userModel;
