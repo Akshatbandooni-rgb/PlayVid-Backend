@@ -73,6 +73,21 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+userSchema.pre("save", async function (next) {
+  try {
+    if (!this.isModified("password")) {
+      return next();
+    }
+    this.password = await bcrypt.hash(
+      this.password,
+      process.env.SALT_ROUNDS || 10
+    );
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 userSchema.methods.generateJwt = function () {
   return jwt.sign(
     {
