@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const errorHandler = require("./middlewares/errorHandler.js");
 const CustomError = require("./utils/customError.js");
+const userRouter = require("./routes/user.routes.js");
 
 // Load environment variables
 dotenv.config();
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ limit: "16kb", extended: true }));
 /* 
    Routes go here 
 */
+app.use("/user", userRouter);
 
 // The error handler middleware must be the last middleware, after all routes
 app.use(errorHandler);
